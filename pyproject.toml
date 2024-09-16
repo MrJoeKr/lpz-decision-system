@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "LPZ-NOR-Decision-System"
+name = "LPZ-Decision-System"
 description = "A decision system to predict whether to fix LPZ diagnosis by diagnosis from NOR"
 version = "0.1.0"
 authors = [
@@ -20,7 +20,7 @@ dependencies = [
 ]
 
 [project.scripts]
-lpz-nor = "cli.main:main"
+lpz = "cli.main:main"
 
 # Find all modules in the project
 [tool.setuptools.packages.find]
