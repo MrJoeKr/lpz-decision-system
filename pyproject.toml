@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "LPZ-NOR-Decision-System"
 description = "A decision system to predict whether to fix LPZ diagnosis by diagnosis from NOR"
@@ -15,8 +19,12 @@ dependencies = [
     "ttkbootstrap==1.10.1",
 ]
 
-[tool.setuptools]
-py-modules = []
+[project.scripts]
+lpz-nor = "cli.main:main"
+
+# Find all modules in the project
+[tool.setuptools.packages.find]
+where = ["."]
 
 [tool.mypy]
 python_version = "3.10"
