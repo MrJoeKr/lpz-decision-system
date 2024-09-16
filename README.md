@@ -8,17 +8,16 @@ Trained on expert decisions.
 ## Installation
 Clone the repository.
 
+### Windows
+Run the file `install.bat`.
+
+### Linux
 Create a virtual environment and activate it (optional but recommended):
 ```bash
 python -m venv venv
 ```
-Activate the virtual environment:
 
-Windows:
-```bash
-.\venv\Scripts\Activate
-```
-Linux:
+Activate the virtual environment:
 ```bash
 source venv/bin/activate
 ```
@@ -29,7 +28,16 @@ pip install .
 ```
 
 ## Usage
-To run the system, use the following command:
+
+### Windows
+Run the file `run.bat`.
+
+### Linux
+Run the command:
 ```bash
 lpz run
+```
+For more information, run:
+```bash
+lpz -h
 ```
