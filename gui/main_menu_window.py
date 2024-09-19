@@ -4,7 +4,7 @@ from ttkbootstrap.constants import BOTH, YES
 from gui.main_menu_frame import MainMenuFrame
 
 
-class MenuWindow(ttk.Window):
+class MainWindow(ttk.Window):
     def __init__(self):
         super().__init__()
 
