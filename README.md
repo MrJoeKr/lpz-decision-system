@@ -9,7 +9,7 @@ Trained on expert decisions.
 Clone the repository.
 
 ### Windows
-Run the file `install.ps1`. Either by right-clicking and selecting `Run with PowerShell` or by running the command in PowerShell:
+Run the file `install.ps1` either by right-clicking and selecting `Run with PowerShell` or by running the command in PowerShell:
 ```powershell
 .\install.ps1
 ```
@@ -33,7 +33,7 @@ pip install .
 ## Usage
 
 ### Windows
-Run the file `run.bat`. Either by double-clicking or by running the command in PowerShell:
+Run the file `run.ps1` either by right-clicking and selecting `Run with PowerShell` or by running the command in PowerShell:
 ```powershell
 .\run.bat
 ```
