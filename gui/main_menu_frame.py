@@ -89,8 +89,8 @@ class MainMenuFrame(ttk.Frame):
         self.exit_button.pack(pady=10)
 
     def _quit_app(self):
-        logger.info("Quitting the application")
-        sys.exit(0)
+        logger.info("Exiting the application")
+        self.master.destroy()
 
 
 if __name__ == "__main__":
