@@ -1,6 +1,23 @@
 import argparse
+import logging
 
 import gui
+
+LOG_FORMAT = "%(levelname)s:%(name)s:%(asctime)s:%(message)s"
+LOG_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+
+logging.basicConfig(
+    level=logging.INFO,
+    format=LOG_FORMAT,
+    datefmt=LOG_DATE_FORMAT,
+    handlers=[
+        # Log to file and console
+        logging.FileHandler("logs/lpz-nor.log", mode="a"),
+        logging.StreamHandler(),
+    ],
+)
+
+logger = logging.getLogger(__name__)
 
 
 def main():
@@ -17,6 +34,7 @@ def main():
 
     if args.command == "run":
         gui.run()
+        logger.info("GUI ran successfully!")
     else:
         parser.print_help()
 
