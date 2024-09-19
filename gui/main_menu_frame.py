@@ -3,6 +3,7 @@ Main menu window.
 """
 
 import logging
+import sys
 
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import BOTH, YES
@@ -89,7 +90,7 @@ class MainMenuFrame(ttk.Frame):
 
     def _quit_app(self):
         logger.info("Quitting the application")
-        self.master.destroy()
+        sys.exit(0)
 
 
 if __name__ == "__main__":
