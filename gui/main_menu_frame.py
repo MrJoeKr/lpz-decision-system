@@ -31,7 +31,7 @@ class MainMenuFrame(ttk.Frame):
         super().__init__(master, padding=15, *args, **kwargs)
         self.pack(fill=BOTH, expand=YES)
 
-        master.title("NOR Cleaner")
+        master.title("LPZ-NOR Decision System")
 
         self.title_label = ttk.Label(
             self, text="Main Menu", style="primary.TLabel"
