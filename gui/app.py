@@ -1,16 +1,15 @@
 import logging
 
-from gui.main_menu_window import MenuWindow
+from gui.main_menu_window import MainWindow
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
 
 
 def run() -> None:
     """
     Run the application.
     """
-    app = MenuWindow()
+    app = MainWindow()
 
     logger.info("Starting the application")
 
