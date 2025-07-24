@@ -2,7 +2,6 @@
 
 import logging
 import tkinter
-from datetime import datetime
 from pathlib import Path
 
 import pandas as pd
@@ -49,11 +48,13 @@ class PredictFrame(ttk.Frame):
             value=Path(
                 self.default_path,
                 "models",
-                datetime.now().strftime("%Y-%m-%d"),
+                "2024-10-08",  # The newest trained model
                 "model.json",
             )
         )
-        self.data_path_var = ttk.StringVar(value=Path(self.default_path))
+        self.data_path_var = ttk.StringVar(
+            value=Path(self.default_path) / "predict_data.csv"
+        )
         self.save_data_path_var = ttk.StringVar(
             value=Path(self.default_path, "predict", "data.csv")
         )
@@ -175,6 +176,9 @@ class PredictFrame(ttk.Frame):
 
         # Save the predictions
         save_data_path = Path(self.save_data_path_var.get())
+        # Create parent directory if it does not exist
+        save_data_path.parent.mkdir(parents=True, exist_ok=True)
+
         logger.info(f"Saving predictions to: {save_data_path}")
         predictions_df = pd.DataFrame(predictions, columns=["prediction"])
 
