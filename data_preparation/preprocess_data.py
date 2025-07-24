@@ -21,8 +21,12 @@ def preprocess_data(data: pd.DataFrame) -> pd.DataFrame:
     """
     check_data_columns(data)
 
+    columns = get_column_names(RAW_DATA_COLUMNS)
+    if not _target_present(data):
+        columns.remove(RAW_DATA_COLUMNS.target)
+
     # Copy data to not modify original data
-    data = data.copy()[get_column_names(RAW_DATA_COLUMNS)]
+    data = data.copy()[columns]
 
     # Forward fill patient ID and new diagnosis
     # Rows are expected to be grouped by Patient ID, so missing values
@@ -47,7 +51,8 @@ def preprocess_data(data: pd.DataFrame) -> pd.DataFrame:
     # Set categorical columns
     # data[["Chyb_DG", "DgKod"]] = data[["Chyb_DG", "DgKod"]].astype("category")
 
-    data = update_target_col(data)
+    if _target_present(data):
+        data = update_target_col(data)
 
     # Transform diagnosis codes to numbers
     data = transform_dg_codes_to_num(data)
@@ -55,10 +60,14 @@ def preprocess_data(data: pd.DataFrame) -> pd.DataFrame:
     # Move target column to the end
     data = data[
         [col for col in data.columns if col != RAW_DATA_COLUMNS.target]
-        + [RAW_DATA_COLUMNS.target]
+        + ([RAW_DATA_COLUMNS.target] if _target_present(data) else [])
     ]
 
     return data
+
+
+def _target_present(data: pd.DataFrame) -> bool:
+    return RAW_DATA_COLUMNS.target in data.columns
 
 
 def transform_dg_codes_to_num(data: pd.DataFrame) -> pd.DataFrame:
