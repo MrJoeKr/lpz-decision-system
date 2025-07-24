@@ -1,6 +1,7 @@
 import pandas as pd
 
-from lib.column_names import _REQUIRED_COLUMNS
+from lib.column_names import RAW_DATA_COLUMNS, get_column_names
+from dataclasses import fields
 
 
 def check_data_columns(data: pd.DataFrame) -> None:
@@ -14,7 +15,7 @@ def check_data_columns(data: pd.DataFrame) -> None:
         ValueError: If a required column is missing
     """
     missing_cols = [
-        col for col in _REQUIRED_COLUMNS.values() if col not in data.columns
+        col for col in get_column_names(RAW_DATA_COLUMNS) if col not in data.columns
     ]
     if missing_cols:
         raise ValueError(f"Missing columns in the data: {missing_cols}")

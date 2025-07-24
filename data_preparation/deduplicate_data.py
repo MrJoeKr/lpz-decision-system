@@ -1,6 +1,6 @@
 import pandas as pd
 
-from lib.column_names import DATA_COLUMNS
+from lib.column_names import PROCESSED_DATA_COLUMNS, RAW_DATA_COLUMNS
 
 
 def deduplicate_data_by_dgkod(
@@ -8,8 +8,8 @@ def deduplicate_data_by_dgkod(
     id_col: str | None = None,
     year_col: str | None = None,
 ) -> pd.DataFrame:
-    """
-    Deduplicate the data by the `DATA_COLUMNS.patient_id` and `DATA_COLUMNS.nor_diagnosis` columns.
+    """Deduplicate the data by the `RAW_DATA_COLUMNS.patient_id` and `RAW_DATA_COLUMNS.nor_diagnosis` columns.
+
     The deduplication is done by in the following way:
       - The records of `data` are grouped by the `id_col` and `DgKod` columns.
       - For each group, the record with the highest value in the `year_col` column is kept.
@@ -18,25 +18,18 @@ def deduplicate_data_by_dgkod(
     """
     if id_col is None:
         # Add assert for mypy check
-        assert hasattr(DATA_COLUMNS, "patient_id")
-        id_col = DATA_COLUMNS.patient_id
+        id_col = RAW_DATA_COLUMNS.patient_id
     if year_col is None:
-        assert hasattr(DATA_COLUMNS, "year")
-        year_col = DATA_COLUMNS.year
-
-    assert hasattr(DATA_COLUMNS, "target")
-    assert hasattr(DATA_COLUMNS, "nor_diagnosis")
+        year_col = PROCESSED_DATA_COLUMNS.year
 
     new_data: list[pd.DataFrame] = []
 
-    for _, group in data.groupby([id_col, DATA_COLUMNS.nor_diagnosis]):
+    for _, group in data.groupby([id_col, RAW_DATA_COLUMNS.nor_diagnosis]):
         if len(group) == 1:
             new_data.append(group)
             continue
 
-        group = group.sort_values(
-            [DATA_COLUMNS.target, year_col], ascending=False
-        )
+        group = group.sort_values([RAW_DATA_COLUMNS.target, year_col], ascending=False)
 
         new_data.append(group.head(1))
 

@@ -1,23 +1,24 @@
-from lib._col_name_class import ColumnName, ColumnVariableMap, VariableName
+from dataclasses import dataclass, fields
 
-# Column names in the data that are required before data processing
-# Variable names can be used in the code
-_REQUIRED_COLUMNS: dict[VariableName, ColumnName] = {
-    # Variable name: Column name
-    # DO NOT change the variable names of the columns below,
-    # only the column names
-    "patient_id": "IDLPZ",
-    "date_of_diagnosis": "DatumStanoveniDg",
-    "lpz_diagnosis": "Chyb_DG",
-    "nor_diagnosis": "DgKod",
-    "target": "Stav",
-    # Add the column names that are required for the model here
-}
 
-_AFTER_PREPROCESSING_COLUMNS: dict[VariableName, ColumnName] = {
-    "year": "Rok",
-}
+@dataclass(frozen=True)
+class RawDataColumns:
+    patient_id: str = "IDLPZ"
+    date_of_diagnosis: str = "DatumStanoveniDg"
+    lpz_diagnosis: str = "Chyb_DG"
+    nor_diagnosis: str = "DgKod"
+    target: str = "Stav"
 
-DATA_COLUMNS = ColumnVariableMap(
-    _REQUIRED_COLUMNS | _AFTER_PREPROCESSING_COLUMNS
-)
+
+@dataclass(frozen=True)
+class ProcessedDataColumns:
+    year: str = "Rok"
+
+
+RAW_DATA_COLUMNS = RawDataColumns()
+PROCESSED_DATA_COLUMNS = ProcessedDataColumns()
+
+
+def get_column_names(dataclass_instance: RawDataColumns | ProcessedDataColumns) -> list[str]:
+    """Get the column names from a dataclass instance."""
+    return [getattr(dataclass_instance, field.name) for field in fields(dataclass_instance)]

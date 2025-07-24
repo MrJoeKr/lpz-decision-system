@@ -14,7 +14,7 @@ from ttkbootstrap.dialogs import Messagebox
 from data_preparation import preprocess_data
 from data_preparation.drop_id import drop_id_from_data
 from gui.error_wrapper import on_event_error_wrapper
-from lib import DATA_COLUMNS as DC
+from lib import RAW_DATA_COLUMNS as DC
 from model.hyperparams import get_xgbc_hyperparams
 
 
@@ -163,7 +163,6 @@ class PredictFrame(ttk.Frame):
         data = preprocess_data(data)
         data, _ = drop_id_from_data(data)
 
-        assert hasattr(DC, "target")
         if DC.target in data.columns:
             logger.warning(f"Data contains target column '{DC.target}', dropping it")
             data.drop(DC.target, axis=1, inplace=True)
