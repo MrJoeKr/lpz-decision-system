@@ -1,16 +1,15 @@
-"""
-Error box to show error messages.
-"""
+"""Error box to show error messages."""
 
-import ttkbootstrap as ttk
-from ttkbootstrap.constants import *
 import ttkbootstrap.dialogs.dialogs as dialogs
+
 
 """
 ErrorBox class for showing error messages.
 It is a messagebox with a title and message.
 """
-class ErrorBox():
+
+
+class ErrorBox:
     def __init__(self, title, message):
         self.title = title
         self.message = message

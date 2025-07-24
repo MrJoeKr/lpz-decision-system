@@ -15,7 +15,7 @@ class MainWindow(ttk.Window):
         self.switch_frame(MainMenuFrame)
 
     def switch_frame(self, frame_class: ttk.Frame) -> None:
-        """Destroy current frame and replace it with a new one"""
+        """Destroy current frame and replace it with a new one."""
         new_frame = frame_class(self)
         if self.current_frame is not None:
             self.current_frame.destroy()
@@ -33,5 +33,5 @@ class MainWindow(ttk.Window):
             self._back_to_menu_button.pack(pady=10)
 
     def _on_back_to_menu(self):
-        """Switch to the MainMenuFrame"""
+        """Switch to the MainMenuFrame."""
         self.switch_frame(MainMenuFrame)

@@ -4,9 +4,7 @@ from gui.error_box import ErrorBox
 
 
 def on_event_error_wrapper(logger: logging.Logger | None = None):
-    """
-    Wrap function to catch exceptions and show them in the ErrorBox.
-    """
+    """Wrap function to catch exceptions and show them in the ErrorBox."""
 
     def decorator(func):
         def wrapper(*args, **kwargs):

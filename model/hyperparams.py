@@ -1,5 +1,3 @@
-import pandas as pd
-
 # Number of positive and negative samples in the training data
 _NEG_N: int = 3633
 _POS_N: int = 466
@@ -19,5 +17,5 @@ _XGBC_HYPERPARAMS: dict = {
 
 
 def get_xgbc_hyperparams() -> dict:
-    """Return hyperparameters for XGBoostClassifier"""
+    """Return hyperparameters for XGBoostClassifier."""
     return _XGBC_HYPERPARAMS

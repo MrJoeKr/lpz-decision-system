@@ -2,13 +2,12 @@ import logging
 
 from gui.main_menu_window import MainWindow
 
+
 logger = logging.getLogger(__name__)
 
 
 def run() -> None:
-    """
-    Run the application.
-    """
+    """Run the application."""
     app = MainWindow()
 
     logger.info("Starting the application")

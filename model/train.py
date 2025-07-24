@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import pandas as pd
 import xgboost as xgb
 
@@ -8,8 +6,7 @@ from model.hyperparams import get_xgbc_hyperparams
 
 
 def train(data: pd.DataFrame) -> xgb.XGBClassifier:
-    """
-    Train the model with the data at the given path.
+    """Train the model with the data at the given path.
 
     Parameters:
         data: pd.DataFrame
@@ -19,10 +16,9 @@ def train(data: pd.DataFrame) -> xgb.XGBClassifier:
         xgb.XGBClassifier
             Trained model
     """
-
     assert hasattr(DC, "target")
 
-    X, y = data.drop(DC.target, axis=1), data[DC.target]
+    x_data, y = data.drop(DC.target, axis=1), data[DC.target]
     model = xgb.XGBClassifier(**get_xgbc_hyperparams())
-    model.fit(X, y)
+    model.fit(x_data, y)
     return model

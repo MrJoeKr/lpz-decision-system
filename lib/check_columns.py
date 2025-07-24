@@ -4,8 +4,7 @@ from lib.column_names import _REQUIRED_COLUMNS
 
 
 def check_data_columns(data: pd.DataFrame) -> None:
-    """
-    Check if all required columns are present in the data.
+    """Check if all required columns are present in the data.
 
     Parameters:
         data: pd.DataFrame

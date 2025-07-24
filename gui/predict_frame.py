@@ -1,6 +1,4 @@
-"""
-Frame for prediction of the model
-"""
+"""Frame for prediction of the model."""
 
 import logging
 import tkinter
@@ -10,7 +8,7 @@ from pathlib import Path
 import pandas as pd
 import ttkbootstrap as ttk
 import xgboost as xgb
-from ttkbootstrap.constants import *
+from ttkbootstrap.constants import BOTH, LEFT, YES, N, X
 from ttkbootstrap.dialogs import Messagebox
 
 from data_preparation import preprocess_data
@@ -19,6 +17,7 @@ from gui.error_wrapper import on_event_error_wrapper
 from lib import DATA_COLUMNS as DC
 from model.hyperparams import get_xgbc_hyperparams
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -26,8 +25,8 @@ OPTION_LF_LABEL_WIDTH = 13
 
 
 class PredictFrame(ttk.Frame):
-    """
-    PredictFrame class for predicting new data using the model.
+    """PredictFrame class for predicting new data using the model.
+
     Consists of the following widgets:
     - Title label
     - Choose model button
@@ -35,15 +34,13 @@ class PredictFrame(ttk.Frame):
     - Predict button
     """
 
-    def __init__(self, master, *args, **kwargs):
-        super().__init__(master, padding=15, *args, **kwargs)
+    def __init__(self, master, **kwargs):
+        super().__init__(master, padding=15, **kwargs)
         self.pack(fill=BOTH, expand=YES)
 
         master.title("Predict new data")
 
-        ttk.Label(self, text="Predict new data", style="primary.TLabel").pack(
-            pady=10
-        )
+        ttk.Label(self, text="Predict new data", style="primary.TLabel").pack(pady=10)
 
         self.default_path = Path(Path().absolute(), "data")
 
@@ -72,13 +69,13 @@ class PredictFrame(ttk.Frame):
         self.create_predict_button()
 
     def create_model_path_row(self):
-        """Add model path row to labelframe"""
+        """Add model path row to labelframe."""
         model_path_row = ttk.Frame(self.option_lf)
         model_path_row.pack(fill=X, expand=YES, pady=(5, 10))
 
-        ttk.Label(
-            model_path_row, text="Model path:", width=OPTION_LF_LABEL_WIDTH
-        ).pack(side=LEFT, padx=5)
+        ttk.Label(model_path_row, text="Model path:", width=OPTION_LF_LABEL_WIDTH).pack(
+            side=LEFT, padx=5
+        )
 
         self.model_path_entry = ttk.Entry(
             model_path_row, textvariable=self.model_path_var, width=50
@@ -95,7 +92,7 @@ class PredictFrame(ttk.Frame):
 
     @on_event_error_wrapper(logger=logger)
     def _on_choose_model(self):
-        """Open file dialog to choose model"""
+        """Open file dialog to choose model."""
         file_path = tkinter.filedialog.askopenfilename(
             initialdir=self.default_path,
             title="Select model file",
@@ -104,13 +101,13 @@ class PredictFrame(ttk.Frame):
         self.model_path_var.set(file_path)
 
     def create_data_path_row(self):
-        """Add data path row to labelframe"""
+        """Add data path row to labelframe."""
         data_path_row = ttk.Frame(self.option_lf)
         data_path_row.pack(fill=X, expand=YES, pady=10)
 
-        ttk.Label(
-            data_path_row, text="Data path:", width=OPTION_LF_LABEL_WIDTH
-        ).pack(side=LEFT, padx=5)
+        ttk.Label(data_path_row, text="Data path:", width=OPTION_LF_LABEL_WIDTH).pack(
+            side=LEFT, padx=5
+        )
 
         self.data_path_entry = ttk.Entry(
             data_path_row, textvariable=self.data_path_var, width=50
@@ -127,7 +124,7 @@ class PredictFrame(ttk.Frame):
 
     @on_event_error_wrapper(logger=logger)
     def _on_choose_data(self):
-        """Open file dialog to choose data"""
+        """Open file dialog to choose data."""
         file_path = tkinter.filedialog.askopenfilename(
             initialdir=self.default_path,
             title="Select data file",
@@ -136,7 +133,7 @@ class PredictFrame(ttk.Frame):
         self.data_path_var.set(file_path)
 
     def create_predict_button(self):
-        """Add predict button to labelframe"""
+        """Add predict button to labelframe."""
         predict_btn = ttk.Button(
             self.option_lf,
             text="Predict",
@@ -146,8 +143,8 @@ class PredictFrame(ttk.Frame):
 
     @on_event_error_wrapper(logger=logger)
     def on_predict(self) -> None:
-        """
-        Predict new data using the model.
+        """Predict new data using the model.
+
         Save the predictions to the specified path.
         """
         model_path = Path(self.model_path_var.get())
@@ -168,9 +165,7 @@ class PredictFrame(ttk.Frame):
 
         assert hasattr(DC, "target")
         if DC.target in data.columns:
-            logger.warning(
-                f"Data contains target column '{DC.target}', dropping it"
-            )
+            logger.warning(f"Data contains target column '{DC.target}', dropping it")
             data.drop(DC.target, axis=1, inplace=True)
 
         logger.info("Data preprocessed successfully")
@@ -196,7 +191,7 @@ class PredictFrame(ttk.Frame):
         )
 
     def create_data_save_path_row(self):
-        """Add data save path row to labelframe"""
+        """Add data save path row to labelframe."""
         data_save_path_row = ttk.Frame(self.option_lf)
         data_save_path_row.pack(fill=X, expand=YES, pady=10)
 
@@ -221,7 +216,7 @@ class PredictFrame(ttk.Frame):
 
     @on_event_error_wrapper(logger=logger)
     def _on_choose_data_save(self):
-        """Open file dialog to choose data save path"""
+        """Open file dialog to choose data save path."""
         file_path = tkinter.filedialog.asksaveasfilename(
             initialdir=self.default_path,
             title="Select save path",

@@ -2,8 +2,7 @@ import pandas as pd
 
 
 def get_dir_path(year: int) -> str:
-    """
-    Get the directory path for the data of a given year.
+    """Get the directory path for the data of a given year.
 
     Parameters:
         year: int
@@ -17,8 +16,7 @@ def get_dir_path(year: int) -> str:
 
 
 def get_file_path(year: int) -> str:
-    """
-    Get the file path for the data of a given year.
+    """Get the file path for the data of a given year.
 
     Parameters:
         year: int
@@ -32,8 +30,7 @@ def get_file_path(year: int) -> str:
 
 
 def get_preprocessed_file_path(year: int) -> str:
-    """
-    Get the file path for the preprocessed data of a given year.
+    """Get the file path for the preprocessed data of a given year.
 
     Parameters:
         year: int
@@ -47,8 +44,7 @@ def get_preprocessed_file_path(year: int) -> str:
 
 
 def read_raw_dataset(year: int, header: int = 0) -> pd.DataFrame:
-    """
-    Read the raw dataset of a given year.
+    """Read the raw dataset of a given year.
 
     Parameters:
         year: int
@@ -66,13 +62,12 @@ def read_raw_dataset(year: int, header: int = 0) -> pd.DataFrame:
 
 
 def read_preprocessed_dataset(year: int) -> pd.DataFrame:
-    """
-    Read the preprocessed dataset of a given year.
+    """Read the preprocessed dataset of a given year.
 
     Parameters:
         year: int
             The year of the data.
-        
+
     Returns:
         pd.DataFrame
             The preprocessed dataset.

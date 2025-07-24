@@ -1,6 +1,4 @@
-"""
-GUI window for training the model and saving it
-"""
+"""GUI window for training the model and saving it."""
 
 import logging
 import tkinter.filedialog
@@ -10,29 +8,29 @@ from pathlib import Path
 import pandas as pd
 import ttkbootstrap as ttk
 import xgboost as xgb
-from ttkbootstrap.constants import *
+from ttkbootstrap.constants import BOTH, LEFT, YES, N, X
 from ttkbootstrap.dialogs import Messagebox
 
 from data_preparation import preprocess_data
 from data_preparation.drop_id import drop_id_from_data
 from gui.error_wrapper import on_event_error_wrapper
-from lib import DATA_COLUMNS as DC
 from model import train
+
 
 logger = logging.getLogger(__name__)
 
 
 class TrainFrame(ttk.Frame):
-    """
-    TrainWindow class for training the model and saving it.
+    """TrainWindow class for training the model and saving it.
+
     Consists of the following widgets:
     - Title label
     - Choose training data button
     - Train and save model button
     """
 
-    def __init__(self, master, *args, **kwargs):
-        super().__init__(master, padding=15, *args, **kwargs)
+    def __init__(self, master, **kwargs):
+        super().__init__(master, padding=15, **kwargs)
         self.pack(fill=BOTH, expand=YES)
 
         master.title("Train the model")
@@ -64,16 +62,14 @@ class TrainFrame(ttk.Frame):
         self.create_train_button()
 
     def create_path_row(self):
-        """Add path row to labelframe"""
+        """Add path row to labelframe."""
         path_row = ttk.Frame(self.option_lf)
         path_row.pack(fill=X, expand=YES, pady=(5, 10))
 
         path_lbl = ttk.Label(path_row, text="Take data from:", width=15)
         path_lbl.pack(side=LEFT, padx=(15, 0))
 
-        path_ent = ttk.Entry(
-            path_row, textvariable=self.data_path_var, width=50
-        )
+        path_ent = ttk.Entry(path_row, textvariable=self.data_path_var, width=50)
         path_ent.pack(side=LEFT, fill=X, expand=YES, padx=5)
 
         browse_btn = ttk.Button(
@@ -85,13 +81,11 @@ class TrainFrame(ttk.Frame):
         browse_btn.pack(side=LEFT, padx=5)
 
     def create_save_model_row(self):
-        """Add save model path row to labelframe"""
+        """Add save model path row to labelframe."""
         save_model_row = ttk.Frame(self.option_lf)
         save_model_row.pack(fill=X, expand=YES, pady=10)
 
-        save_model_lbl = ttk.Label(
-            save_model_row, text="Save model to:", width=15
-        )
+        save_model_lbl = ttk.Label(save_model_row, text="Save model to:", width=15)
         save_model_lbl.pack(side=LEFT, padx=(15, 0))
 
         save_model_ent = ttk.Entry(
@@ -108,7 +102,7 @@ class TrainFrame(ttk.Frame):
         browse_btn.pack(side=LEFT, padx=5)
 
     def create_train_button(self):
-        """Add train button to labelframe"""
+        """Add train button to labelframe."""
         train_btn = ttk.Button(
             self.option_lf,
             text="Train and save model",
@@ -117,7 +111,7 @@ class TrainFrame(ttk.Frame):
         train_btn.pack(pady=10)
 
     def on_browse_data(self):
-        """Open file dialog to select training data"""
+        """Open file dialog to select training data."""
         path = tkinter.filedialog.askopenfilename(
             initialdir=self.default_path,
             title="Select training data",
@@ -127,7 +121,7 @@ class TrainFrame(ttk.Frame):
             self.data_path_var.set(path)
 
     def on_browse_save_model(self):
-        """Open file dialog to select save model path"""
+        """Open file dialog to select save model path."""
         path = tkinter.filedialog.asksaveasfilename(
             initialdir=Path(self.default_path, "models"),
             title="Save model to",
@@ -145,7 +139,7 @@ class TrainFrame(ttk.Frame):
 
     @on_event_error_wrapper(logger=logger)
     def on_train(self):
-        """Train the model and save it"""
+        """Train the model and save it."""
         save_path = Path(self.save_model_path_var.get())
         self._check_save_path_suffix(save_path)
 
@@ -157,15 +151,14 @@ class TrainFrame(ttk.Frame):
         data, _ = drop_id_from_data(data)
         logger.info("Data preprocessed successfully")
 
-        logger.info(f"Training model with preprocessed data")
+        logger.info("Training model with preprocessed data")
         model = train(data)
         logger.info("Model trained successfully")
 
         self.save_model(model, save_path)
 
     def save_model(self, model: xgb.XGBClassifier, save_path: Path) -> None:
-        """
-        Save the model to the given path.
+        """Save the model to the given path.
 
         Parameters:
             model: xgb.XGBClassifier
@@ -173,7 +166,6 @@ class TrainFrame(ttk.Frame):
             save_path: Path
                 Path to save the model to
         """
-
         logger.info(f"Saving model to {save_path}")
         # Create parent directories if they do not exist
         save_path.parent.mkdir(parents=True, exist_ok=True)
