@@ -1,5 +1,3 @@
-from dataclasses import fields
-
 import pandas as pd
 
 from lib import check_data_columns

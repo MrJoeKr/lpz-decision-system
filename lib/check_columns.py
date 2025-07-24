@@ -1,7 +1,6 @@
 import pandas as pd
 
 from lib.column_names import RAW_DATA_COLUMNS, get_column_names
-from dataclasses import fields
 
 
 def check_data_columns(data: pd.DataFrame) -> None:

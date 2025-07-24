@@ -19,6 +19,10 @@ RAW_DATA_COLUMNS = RawDataColumns()
 PROCESSED_DATA_COLUMNS = ProcessedDataColumns()
 
 
-def get_column_names(dataclass_instance: RawDataColumns | ProcessedDataColumns) -> list[str]:
+def get_column_names(
+    dataclass_instance: RawDataColumns | ProcessedDataColumns,
+) -> list[str]:
     """Get the column names from a dataclass instance."""
-    return [getattr(dataclass_instance, field.name) for field in fields(dataclass_instance)]
+    return [
+        getattr(dataclass_instance, field.name) for field in fields(dataclass_instance)
+    ]
