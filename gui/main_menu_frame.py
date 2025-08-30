@@ -7,6 +7,7 @@ from ttkbootstrap.constants import BOTH, YES
 
 from gui.error_wrapper import on_event_error_wrapper
 from gui.predict_frame import PredictFrame
+from gui.prepare_data_frame import PrepDataFrame
 from gui.train_frame import TrainFrame
 
 
@@ -34,9 +35,28 @@ class MainMenuFrame(ttk.Frame):
         self.title_label = ttk.Label(self, text="Main Menu", style="primary.TLabel")
         self.title_label.pack(pady=10)
 
+        self.create_prep_data_button()
         self.create_train_button()
         self.create_predict_button()
         self.create_exit_button()
+
+    def create_prep_data_button(self):
+        self.prep_data_button = ttk.Button(
+            self,
+            text="Preprocess Data",
+            style="primary.TButton",
+            command=self._on_prep_data,
+            width=BUTTON_WIDTH,
+        )
+        self.prep_data_button.pack(pady=10)
+
+    @on_event_error_wrapper(logger=logger)
+    def _on_prep_data(self):
+        """When the user clicks the "Preprocess Data" button.
+
+        The window is switched to the PrepDataFrame.
+        """
+        self.master.switch_frame(PrepDataFrame)
 
     def create_train_button(self):
         self.train_button = ttk.Button(
