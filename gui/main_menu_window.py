@@ -1,6 +1,7 @@
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import BOTH, YES
 
+from gui.constants import WINDOW_HEIGHT, WINDOW_WIDTH
 from gui.main_menu_frame import MainMenuFrame
 
 
@@ -9,7 +10,7 @@ class MainWindow(ttk.Window):
         super().__init__()
 
         # Set size of the window
-        self.geometry("800x400")
+        self.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 
         self.current_frame = None
         self.switch_frame(MainMenuFrame)
