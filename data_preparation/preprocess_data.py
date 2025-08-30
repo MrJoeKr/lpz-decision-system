@@ -216,6 +216,9 @@ def update_target_col(data: pd.DataFrame) -> pd.DataFrame:
     data = fix_dgkod_target_col(data)
 
     data[RAW_DATA_COLUMNS.target] = data.apply(
-        lambda x: 1 if x[RAW_DATA_COLUMNS.target] == x[RAW_DATA_COLUMNS.nor_diagnosis] else 0, axis=1
+        lambda x: 1
+        if x[RAW_DATA_COLUMNS.target] == x[RAW_DATA_COLUMNS.nor_diagnosis]
+        else 0,
+        axis=1,
     )
     return data
