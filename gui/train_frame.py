@@ -69,7 +69,7 @@ class TrainFrame(ttk.Frame):
         path_lbl = ttk.Label(path_row, text="Take data from:", width=15)
         path_lbl.pack(side=LEFT, padx=(15, 0))
 
-        path_ent = ttk.Entry(path_row, textvariable=self.data_path_var, width=50)
+        path_ent = ttk.Entry(path_row, textvariable=self.data_path_var, width=40)
         path_ent.pack(side=LEFT, fill=X, expand=YES, padx=5)
 
         browse_btn = ttk.Button(
@@ -89,7 +89,7 @@ class TrainFrame(ttk.Frame):
         save_model_lbl.pack(side=LEFT, padx=(15, 0))
 
         save_model_ent = ttk.Entry(
-            save_model_row, textvariable=self.save_model_path_var, width=50
+            save_model_row, textvariable=self.save_model_path_var, width=40
         )
         save_model_ent.pack(side=LEFT, fill=X, expand=YES, padx=5)
 
